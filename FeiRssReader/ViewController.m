@@ -61,10 +61,6 @@
         NSString *imagename=[NSString stringWithFormat:@"Image%d.jpg",i];
 
         UIImage *oldImage = [UIImage imageNamed:imagename];
-//        UIGraphicsBeginImageContext(CGSizeMake(414, 150));
-//        [oldImage drawInRect:CGRectMake(0, 0, 414, 150)];
-//        UIImage *newImage = UIGraphicsGetImageFromCurrentImageContext();
-//        UIGraphicsEndImageContext();
         
         imageview.image = oldImage;
 
@@ -148,8 +144,6 @@
     // URL to a data file named 'settings.plist' in that directory
     NSURL *tempURL = [urlToDocumentsDirectory URLByAppendingPathComponent:@"url.plist"];
     
-    //    NSArray *tempURLArray = [[NSArray alloc] initWithObjects:@"www.111.com", @"www.222.com", nil];
-    //    [tempURLArray writeToURL:tempURL atomically:YES];
     return tempURL;
 }
 

@@ -15,7 +15,7 @@
 - (id)initWithHtmlContent:(NSString *)htmlContent atIndexPath:(NSIndexPath *)indexPath delegate:(id<GetMainImageFromWebpageDelegate>)theDelegate{
     
     if (self = [super init]) {
-        // 2: Set the properties.
+        // Set the properties.
         self.delegate = theDelegate;
         self.htmlContent = htmlContent;
         self.indexPathInTableView = indexPath;
@@ -28,7 +28,7 @@
 // Regularly check for isCancelled, to make sure the operation terminates as soon as possible.
 - (void)main {
     
-    // 4: Apple recommends using @autoreleasepool block instead of alloc and init NSAutoreleasePool, because blocks are more efficient. You might use NSAuoreleasePool instead and that would be fine.
+    // Apple recommends using @autoreleasepool block instead of alloc and init NSAutoreleasePool, because blocks are more efficient. You might use NSAuoreleasePool instead and that would be fine.
     @autoreleasepool {
         
         if (self.isCancelled)
@@ -76,7 +76,6 @@
             }
             
             // if the image is bigger than 40 KB, use it as thumbnail
-            //if (imageData.length/1024.0 > 40 && !gotImageURL) {
             if (imageData.length/1024.0 > 40) {
                 
                 // Update the UI
@@ -94,7 +93,7 @@
                     self.imageLink = @"";
                 }
                 
-                // 5: Cast the operation to NSObject, and notify the caller on the main thread.
+                // Cast the operation to NSObject, and notify the caller on the main thread.
                 [(NSObject *)self.delegate performSelectorOnMainThread:@selector(GetMainImageDidFinish:) withObject:self waitUntilDone:NO];
 
                 gotImageURL = true;
@@ -107,7 +106,7 @@
         if (self.isCancelled)
             return;
         if (!gotImageURL && nodes.count != 0) {
-            // 5: Cast the operation to NSObject, and notify the caller on the main thread.
+            // Cast the operation to NSObject, and notify the caller on the main thread.
             self.imageLink = [[nodes objectAtIndex:0] objectForKey:@"src"];
             [(NSObject *)self.delegate performSelectorOnMainThread:@selector(GetMainImageDidFinish:) withObject:self waitUntilDone:NO];
         }

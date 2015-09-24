@@ -15,7 +15,7 @@
 - (id)initWithImageLink:(NSString *)imageLink atIndexPath:(NSIndexPath *)indexPath delegate:(id<ImageDownloaderDelegate>) theDelegate {
     
     if (self = [super init]) {
-        // 2: Set the properties.
+        // Set the properties.
         self.delegate = theDelegate;
         self.imageLink = imageLink;
         self.indexPathInTableView = indexPath;
@@ -28,7 +28,7 @@
 // Regularly check for isCancelled, to make sure the operation terminates as soon as possible.
 - (void)main {
     
-    // 4: Apple recommends using @autoreleasepool block instead of alloc and init NSAutoreleasePool, because blocks are more efficient. You might use NSAuoreleasePool instead and that would be fine.
+    // Apple recommends using @autoreleasepool block instead of alloc and init NSAutoreleasePool, because blocks are more efficient. You might use NSAuoreleasePool instead and that would be fine.
     @autoreleasepool {
         
         if (self.isCancelled)
@@ -45,7 +45,6 @@
         if (imageData) {
             UIImage *downloadedImage = [UIImage imageWithData:imageData];
             self.image = downloadedImage;
-            //self.photoRecord.image = downloadedImage;
         }
         else {
             //self.photoRecord.failed = YES;

@@ -19,7 +19,6 @@
     [super viewDidLoad];
     self.myWebView.delegate = self;
 
-    //NSString *tempUrlAddress = @"http://www.apple.com";
     //Create a URL object.
     NSLog(@"in webview url is %@", self.urlAddress);
     // the url must start with http:// or https://
@@ -37,7 +36,7 @@
     NSURL *url = [NSURL URLWithString:correcedURLAddress];
     //NSURL *url = [NSURL URLWithString:self.urlAddress];
     NSLog(@"the nsurl is %@", url);
-    //NSURL *url = [NSURL URLWithString:@"http://www.mitbbs.com/article_t/Dreamer/34683023.html"];
+    
     //URL Requst Object
     NSURLRequest *requestObj = [NSURLRequest requestWithURL:url];
     //Load the request in the UIWebView.
