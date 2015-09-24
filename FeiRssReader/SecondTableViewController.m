@@ -632,7 +632,6 @@
         imageLink = [self getAttributes:linkString];
         
         imageSource = [imageLink valueForKey:@"src"];
-        //NSLog(@"in getfirstimageurl, url = %@", imageSource);
     }
     return imageSource;
 }
