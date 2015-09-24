@@ -76,9 +76,8 @@
 
 - (void)didReceiveMemoryWarning {
     [self cancelAllOperations];
-    [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
-    
+    [super didReceiveMemoryWarning];
     NSLog(@"xxxbo: in didreceiveMemoryWarning: low memory!");
 }
 
@@ -196,7 +195,7 @@
 
     if ([[segue identifier] isEqualToString:@"webView"]) {
         WebViewController *detailedTableView = [segue destinationViewController];
-        //detailedTableView.urlAddress = [self.urlArray objectAtIndex:[self.tableView indexPathForSelectedRow].row];
+        
         detailedTableView.urlAddress = [[self.newsItem objectAtIndex:[self.tableView indexPathForSelectedRow].row] objectForKey:@"link"];
         NSLog(@"detailedTableView.urlAddress is %@", detailedTableView.urlAddress);
         
@@ -374,12 +373,6 @@
         [self.tempDataStorage setObject:[NSNull null] forKey:@"image"];
         //[self.newsItem addObject:[[NSDictionary alloc] initWithDictionary:self.tempDataStorage]];
         [self.newsItem addObject:[[NSMutableDictionary alloc] initWithDictionary:self.tempDataStorage]];
-        
-//        //loop the array and print the items
-//        for (NSDictionary *myItem in self.newsItem) {
-//            NSLog(@"the title is %@", [myItem objectForKey:@"title"]);
-//            NSLog(@"the link is %@", [myItem objectForKey:@"link"]);
-//        }
         
     }
     else if ([elementName isEqualToString:@"title"]){
@@ -567,10 +560,7 @@
     int index = 0;
     
     for (NSMutableDictionary *myItem in self.newsItem) {
-        //long  index = ((NSIndexPath*)[indexArray objectAtIndex:i]).row;
-        //NSMutableDictionary *tempItem = [self.newsItem objectAtIndex:index];
-//        NSLog(@"the title is %@", [tempItem objectForKey:@"title"]);
-//        NSLog(@"the link is %@", [tempItem objectForKey:@"link"]);
+ ;
         // remove the space, tab, and new line from the url
         NSString *cleanUrlAddress = [[NSString stringWithString:[myItem objectForKey:@"link"]] stringByTrimmingCharactersInSet:
                                      [NSCharacterSet whitespaceAndNewlineCharacterSet]];
