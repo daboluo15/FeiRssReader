@@ -816,7 +816,6 @@
         
         // 3: If it does not have an image, start downloading the image by calling startImageDownloadingForRecord:atIndexPath: (which will be implemented shortly). Youíll do the same for filtering operations: if the image has not yet been filtered, call startImageFiltrationForRecord:atIndexPath: (which will also be implemented shortly).
         [self startGetMainImageForHtmlContent:htmlContent atIndexPath:indexPath];
-        
     }
     
 }
