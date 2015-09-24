@@ -560,7 +560,7 @@
     int index = 0;
     
     for (NSMutableDictionary *myItem in self.newsItem) {
- ;
+
         // remove the space, tab, and new line from the url
         NSString *cleanUrlAddress = [[NSString stringWithString:[myItem objectForKey:@"link"]] stringByTrimmingCharactersInSet:
                                      [NSCharacterSet whitespaceAndNewlineCharacterSet]];
