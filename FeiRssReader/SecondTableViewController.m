@@ -27,6 +27,9 @@
 
 @property (nonatomic, strong) NSString *currentElement;
 
+@property (nonatomic) UIScrollView *scrollview;
+@property (nonatomic) UIPageControl *pagecontrol;
+
 @end
 
 @implementation SecondTableViewController
@@ -35,6 +38,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
+    [self createPageViewOnTableView];
     // Uncomment the following line to preserve selection between presentations.
     // self.clearsSelectionOnViewWillAppear = NO;
     
@@ -79,6 +83,71 @@
     // Dispose of any resources that can be recreated.
     [super didReceiveMemoryWarning];
     NSLog(@"xxxbo: in didreceiveMemoryWarning: low memory!");
+}
+
+#pragma mark - page view
+-(void) createPageViewOnTableView {
+    //创建scrollview 添加内容，设置代理，将其添加到headerview中
+    CGFloat width = [[UIScreen mainScreen] bounds].size.width;
+    self.scrollview=[[UIScrollView alloc]initWithFrame:CGRectMake(0, 0, width, 150)];
+    NSLog(@"the width of the screen is %f", [[UIScreen mainScreen] bounds].size.width);
+    //分页设置
+    self.scrollview.pagingEnabled=YES;
+    //滚动条显示设置
+    self.scrollview.showsHorizontalScrollIndicator=NO;
+    self.scrollview.showsVerticalScrollIndicator=NO;
+    //视图内容的尺寸
+    self.scrollview.contentSize=CGSizeMake(width*4, 150);
+    self.tableView.tableHeaderView= self.scrollview;
+    self.scrollview.delegate=self;
+    //添加内容
+    float x=0;
+    for (int i=1; i<=4; i++)
+    {
+        UIImageView *imageview=[[UIImageView alloc]initWithFrame:CGRectMake(x, 0, width, 150)];
+        
+        NSString *imagename=[NSString stringWithFormat:@"Image%d.jpg",i];
+        
+        UIImage *oldImage = [UIImage imageNamed:imagename];
+        
+        imageview.image = oldImage;
+        
+        
+        
+        [self.scrollview addSubview:imageview];
+        x += width;
+        
+        
+    }
+    self.tableView.tableHeaderView=self.scrollview;
+    //self.tableView.dataSource = self;
+    
+    
+    //创建分页控制器，添加到tableview中
+    self.pagecontrol=[[UIPageControl alloc]initWithFrame:CGRectMake(200, 130, 20, 20)];
+    //总得页数
+    self.pagecontrol.numberOfPages=4;
+    //当前显示的页数
+    self.pagecontrol.currentPage=0;
+    [self.tableView addSubview:self.pagecontrol];
+    
+    [self setupGestureRecognizer];
+
+}
+
+- (void)setupGestureRecognizer {
+    UITapGestureRecognizer *tapGestureRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(handleTapFrom:)];
+    tapGestureRecognizer.numberOfTapsRequired = 1;
+    [self.scrollview addGestureRecognizer:tapGestureRecognizer];
+    //tapGestureRecognizer.delegate = self;
+}
+
+- (void) handleTapFrom: (UITapGestureRecognizer *)recognizer
+{
+    //Code to handle the gesture
+    long currentPage = self.pagecontrol.currentPage;
+    NSLog(@"current page is %ld", currentPage);
+    [self performSegueWithIdentifier:@"secondTableView" sender:self];
 }
 
 #pragma mark - Table view data source
@@ -424,6 +493,28 @@
     [self resumeAllOperations];
 }
 #endif
+
+//使用代理方法实现翻页效果
+
+-(void)scrollViewDidScroll:(UIScrollView *)scrollView
+{
+    //    if (scrollView==self.scrollview)
+    //    {
+    //        NSLog(@"scrollview.contentoffset is %f", self.scrollview.contentOffset.x);
+    //        int page= self.scrollview.contentOffset.x/[[UIScreen mainScreen] bounds].size.width;
+    //        self.pagecontrol.currentPage=page;
+    //
+    //    }
+    //    CGFloat pageWidth = scrollView.bounds.size.width;
+    //    NSLog(@"pageWidth is %f", pageWidth);
+    //    NSInteger pageNumber = floor((scrollView.contentOffset.x - pageWidth / 2) / pageWidth) + 1;
+    //    self.pagecontrol.currentPage = pageNumber;
+    CGFloat width = scrollView.frame.size.width;
+    NSInteger page = (scrollView.contentOffset.x + (0.5f * width)) / width;
+    self.pagecontrol.currentPage=page;
+    
+}
+
 
 
 #pragma mark -

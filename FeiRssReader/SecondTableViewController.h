@@ -11,7 +11,7 @@
 #import "GetMainImageFromWebpage.h"
 #import "PendingOperations.h"
 
-@interface SecondTableViewController : UITableViewController <NSXMLParserDelegate, UIScrollViewDelegate, UINavigationControllerDelegate, ImageDownloaderDelegate, GetMainImageFromWebpageDelegate>
+@interface SecondTableViewController : UITableViewController <NSXMLParserDelegate, UIScrollViewDelegate, UIGestureRecognizerDelegate, UINavigationControllerDelegate, ImageDownloaderDelegate, GetMainImageFromWebpageDelegate>
 @property (nonatomic) long pageNumber;
 @property (nonatomic) long selectedCell;
 @property (nonatomic) NSString *rssLink;
