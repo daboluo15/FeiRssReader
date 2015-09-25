@@ -92,27 +92,34 @@
     self.scrollview=[[UIScrollView alloc]initWithFrame:CGRectMake(0, 0, width, 150)];
     NSLog(@"the width of the screen is %f", [[UIScreen mainScreen] bounds].size.width);
     //分页设置
-    self.scrollview.pagingEnabled=YES;
+    self.scrollview.pagingEnabled = YES;
     //滚动条显示设置
     self.scrollview.showsHorizontalScrollIndicator=NO;
     self.scrollview.showsVerticalScrollIndicator=NO;
     //视图内容的尺寸
-    self.scrollview.contentSize=CGSizeMake(width*4, 150);
-    self.tableView.tableHeaderView= self.scrollview;
-    self.scrollview.delegate=self;
+    self.scrollview.contentSize = CGSizeMake(width*4, 150);
+    self.tableView.tableHeaderView = self.scrollview;
+    self.scrollview.delegate = self;
     //添加内容
-    float x=0;
-    for (int i=1; i<=4; i++)
+    float x = 0;
+    for (int i = 1; i <= 4; i++)
     {
-        UIImageView *imageview=[[UIImageView alloc]initWithFrame:CGRectMake(x, 0, width, 150)];
+        UIImageView *imageview = [[UIImageView alloc]initWithFrame:CGRectMake(x, 0, width, 150)];
         
-        NSString *imagename=[NSString stringWithFormat:@"Image%d.jpg",i];
+        //NSString *imagename=[NSString stringWithFormat:@"Image%d.jpg",i];
+        NSString *imagename = @"news-paper";
         
         UIImage *oldImage = [UIImage imageNamed:imagename];
         
         imageview.image = oldImage;
         
-        
+        UILabel *myLabel = [[UILabel alloc] initWithFrame:CGRectMake(20, 90, width - 40, 40)];
+        myLabel.text = @"Getting Content...";
+        myLabel.textAlignment = NSTextAlignmentCenter;
+        myLabel.textColor = [UIColor whiteColor];
+        myLabel.backgroundColor = [UIColor colorWithRed:32.0/255.0 green:32.0/255.0 blue:32.0/255.0 alpha:0.8];
+        //myLabel.backgroundColor = [UIColor clearColor];
+        [imageview addSubview:myLabel];
         
         [self.scrollview addSubview:imageview];
         x += width;
@@ -198,6 +205,18 @@
 
     NSString *title = [[[self.newsItem objectAtIndex:indexPath.row] objectForKey:@"title"] stringByTrimmingCharactersInSet:
                                  [NSCharacterSet whitespaceAndNewlineCharacterSet]];
+    
+    // set the label of the headerview
+    if (indexPath.row < self.scrollview.subviews.count) {
+        if ([self.scrollview subviews])
+        {
+            UIView *currentPageView = [[self.scrollview subviews] objectAtIndex:indexPath.row];
+            UILabel *currentLabel = [[currentPageView subviews] objectAtIndex:0];
+            currentLabel.text = title;
+
+        }
+    }
+    
     cell.textLabel.text = title;
     
     NSLog(@"cell image name is %@, indexpath.row = %ld", [self.imageUrlList objectAtIndex:indexPath.row], indexPath.row);
@@ -511,7 +530,7 @@
     //    self.pagecontrol.currentPage = pageNumber;
     CGFloat width = scrollView.frame.size.width;
     NSInteger page = (scrollView.contentOffset.x + (0.5f * width)) / width;
-    self.pagecontrol.currentPage=page;
+    self.pagecontrol.currentPage = page;
     
 }
 
@@ -843,11 +862,18 @@
     // 2: Get hold of the image instance.
     UIImage *itemImage = downloader.image;
     
+    // update the pageView
+    if (indexPath.row < self.scrollview.subviews.count) {
+        UIImageView *currentPageView = [[self.scrollview subviews] objectAtIndex:indexPath.row];
+        currentPageView.image = itemImage;
+    }
+    
     if (itemImage != nil) {
         // 3: Replace the updated PhotoRecord in the main data source (Photos array).
         [[self.newsItem objectAtIndex:indexPath.row] setObject:itemImage forKey:@"image"];
         
         // 4: Update UI.
+        [self.tableView addSubview:self.pagecontrol];
         [self.tableView reloadRowsAtIndexPaths:[NSArray arrayWithObject:indexPath] withRowAnimation:UITableViewRowAnimationFade];
         
         // 5: Remove the operation from downloadsInProgress.
