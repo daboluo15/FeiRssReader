@@ -154,7 +154,13 @@
     //Code to handle the gesture
     long currentPage = self.pagecontrol.currentPage;
     NSLog(@"current page is %ld", currentPage);
-    [self performSegueWithIdentifier:@"secondTableView" sender:self];
+    
+    // Select uitableview row programmatically
+    [self.tableView selectRowAtIndexPath:[NSIndexPath indexPathForRow:currentPage inSection:0] animated:NO scrollPosition:UITableViewScrollPositionNone];
+
+    [self performSegueWithIdentifier:@"webView" sender:self];
+    
+    
 }
 
 #pragma mark - Table view data source
