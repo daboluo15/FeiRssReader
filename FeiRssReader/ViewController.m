@@ -38,7 +38,8 @@
 //    [headerView addSubview:page];
 //    self.myTableView.tableHeaderView = headerView;
 //    // ...
-    
+  
+#if 0
     //创建scrollview 添加内容，设置代理，将其添加到headerview中
     CGFloat width = [[UIScreen mainScreen] bounds].size.width;
     self.scrollview=[[UIScrollView alloc]initWithFrame:CGRectMake(0, 0, width, 150)];
@@ -84,6 +85,7 @@
     [self.myTableView addSubview:self.pagecontrol];
     
     [self setupGestureRecognizer];
+#endif
     
     self.myURLTofile = [self createAndOpenURLFile];
     //self.urlArray = [[NSMutableArray alloc] init];
