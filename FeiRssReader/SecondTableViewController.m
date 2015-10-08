@@ -131,7 +131,7 @@
     
     
     //创建分页控制器，添加到tableview中
-    self.pagecontrol=[[UIPageControl alloc]initWithFrame:CGRectMake(200, 130, 20, 20)];
+    self.pagecontrol=[[UIPageControl alloc]initWithFrame:CGRectMake(width/2 - 5, 130, 20, 20)];
     //总得页数
     self.pagecontrol.numberOfPages=4;
     //当前显示的页数
