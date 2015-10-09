@@ -157,8 +157,13 @@
     
     // Select uitableview row programmatically
     [self.tableView selectRowAtIndexPath:[NSIndexPath indexPathForRow:currentPage inSection:0] animated:NO scrollPosition:UITableViewScrollPositionNone];
-
-    [self performSegueWithIdentifier:@"webView" sender:self];
+    
+    // if the link is not nil, go to the webView to show the html page
+    if ([[self.newsItem objectAtIndex:[self.tableView indexPathForSelectedRow].row] objectForKey:@"link"] != nil) {
+        [self performSegueWithIdentifier:@"webView" sender:self];
+    } else {
+        NSLog(@"The link of the html page is nil");
+    }
     
     
 }

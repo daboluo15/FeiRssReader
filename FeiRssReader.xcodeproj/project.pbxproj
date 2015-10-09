@@ -243,6 +243,7 @@
 				TargetAttributes = {
 					ABF4A6461B995AAD006788EA = {
 						CreatedOnToolsVersion = 6.4;
+						DevelopmentTeam = H9TK8A22ZU;
 					};
 					ABF4A65F1B995AAD006788EA = {
 						CreatedOnToolsVersion = 6.4;
@@ -443,9 +444,12 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				INFOPLIST_FILE = FeiRssReader/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = FeiRssReader;
+				PROVISIONING_PROFILE = "";
 			};
 			name = Debug;
 		};
@@ -453,9 +457,12 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				INFOPLIST_FILE = FeiRssReader/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = FeiRssReader;
+				PROVISIONING_PROFILE = "";
 			};
 			name = Release;
 		};
