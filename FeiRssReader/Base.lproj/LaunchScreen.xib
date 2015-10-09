@@ -39,14 +39,14 @@
             <color key="backgroundColor" red="0.47748832759999998" green="0.74240779869999995" blue="1" alpha="1" colorSpace="calibratedRGB"/>
             <constraints>
                 <constraint firstItem="TOa-5r-Gw3" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="HCL-d5-iWZ"/>
+                <constraint firstItem="idL-da-86I" firstAttribute="centerY" secondItem="TOa-5r-Gw3" secondAttribute="centerY" id="HmL-sm-ZiY"/>
+                <constraint firstItem="idL-da-86I" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="Ikv-43-f2W"/>
+                <constraint firstItem="idL-da-86I" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="JSC-3R-49q"/>
                 <constraint firstAttribute="bottom" secondItem="8ie-xW-0ye" secondAttribute="bottom" constant="20" id="Kzo-t9-V3l"/>
                 <constraint firstItem="8ie-xW-0ye" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="20" symbolic="YES" id="MfP-vx-nX0"/>
                 <constraint firstAttribute="centerX" secondItem="8ie-xW-0ye" secondAttribute="centerX" id="ZEH-qu-HZ9"/>
-                <constraint firstAttribute="trailing" secondItem="idL-da-86I" secondAttribute="trailing" id="aIG-Hp-lLn"/>
-                <constraint firstItem="idL-da-86I" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="iMB-GP-AaJ"/>
-                <constraint firstItem="idL-da-86I" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="qGI-7k-DlH"/>
                 <constraint firstItem="TOa-5r-Gw3" firstAttribute="centerY" secondItem="iN0-l3-epB" secondAttribute="centerY" id="tCZ-1n-eDU"/>
-                <constraint firstAttribute="bottom" secondItem="idL-da-86I" secondAttribute="bottom" id="vse-TK-f7L"/>
+                <constraint firstItem="idL-da-86I" firstAttribute="centerX" secondItem="TOa-5r-Gw3" secondAttribute="centerX" id="wgf-Bz-7BP"/>
             </constraints>
             <nil key="simulatedStatusBarMetrics"/>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
