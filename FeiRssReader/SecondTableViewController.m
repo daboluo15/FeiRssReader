@@ -9,6 +9,7 @@
 #import "SecondTableViewController.h"
 #import "WebViewController.h"
 #import "TFHpple.h"
+#import "MSCellAccessory.h"
 
 @interface SecondTableViewController ()
 @property(nonatomic) NSURL *myURLTofile;
@@ -26,6 +27,8 @@
 @property (nonatomic, strong) NSMutableString *foundValue;
 
 @property (nonatomic, strong) NSString *currentElement;
+
+@property (nonatomic) BOOL isChannelTitle;
 
 @property (nonatomic) UIScrollView *scrollview;
 @property (nonatomic) UIPageControl *pagecontrol;
@@ -65,6 +68,8 @@
     [self.spinner startAnimating];
     
     self.pendingOperations = [[PendingOperations alloc] init];
+    
+    self.isChannelTitle = NO;
     
     [self loadFeed];
 
@@ -269,6 +274,9 @@
             }
         }
     }
+    
+    cell.accessoryView = [MSCellAccessory accessoryWithType:FLAT_DISCLOSURE_INDICATOR color:[UIColor colorWithRed:0/255.0 green:166/255.0 blue:149/255.0 alpha:1.0]];
+    
     return cell;
 }
 
@@ -387,6 +395,7 @@
     NSData *data = [NSData dataWithContentsOfURL:rssURL];
         NSString *ret = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
         NSLog(@"ret=%@", ret);
+        
         dispatch_async(dispatch_get_main_queue(), ^{
             // Make sure that there is data.
             if (data != nil) {
@@ -456,9 +465,15 @@
 
 -(void)parser:(NSXMLParser *)parser didStartElement:(NSString *)elementName namespaceURI:(NSString *)namespaceURI qualifiedName:(NSString *)qName attributes:(NSDictionary *)attributeDict{
     
-    // If the current element name is equal to "geoname" then initialize the temporary dictionary.
+    // to get the title of the current channel
+    if ([elementName isEqualToString:@"channel"]) {
+         self.isChannelTitle = YES;
+    }
+    
+    // If the current element name is equal to "item" then initialize the temporary dictionary.
     if ([elementName isEqualToString:@"item"]) {
         self.tempDataStorage = [[NSMutableDictionary alloc] init];
+        self.isChannelTitle = NO;
     }
     
     // Keep the current element.
@@ -468,18 +483,20 @@
 -(void)parser:(NSXMLParser *)parser didEndElement:(NSString *)elementName namespaceURI:(NSString *)namespaceURI qualifiedName:(NSString *)qName{
     
     if ([elementName isEqualToString:@"item"]) {
-        // If the closing element equals to "geoname" then the all the data of a neighbour country has been parsed and the dictionary should be added to the neighbours data array.
+
         [self.tempDataStorage setObject:[NSNull null] forKey:@"image"];
         //[self.newsItem addObject:[[NSDictionary alloc] initWithDictionary:self.tempDataStorage]];
         [self.newsItem addObject:[[NSMutableDictionary alloc] initWithDictionary:self.tempDataStorage]];
         
     }
     else if ([elementName isEqualToString:@"title"]){
-        // If the country name element was found then store it.
         [self.tempDataStorage setObject:[NSString stringWithString:self.foundValue] forKey:@"title"];
+        
+        if (self.isChannelTitle == YES) {
+            self.title = self.foundValue;
+        }
     }
     else if ([elementName isEqualToString:@"link"]){
-        // If the toponym name element was found then store it.
         [self.tempDataStorage setObject:[NSString stringWithString:self.foundValue] forKey:@"link"];
     }
     

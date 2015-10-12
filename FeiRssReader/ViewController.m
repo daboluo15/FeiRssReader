@@ -96,6 +96,8 @@
         [self initWithDefaultRssFeed];
     }
     
+    self.title = @"FeiRssReader";
+    
     //[self fetchAllImageURL:@"http://36kr.com/p/5037508.html"];
 }
 
@@ -312,6 +314,8 @@
 //        [cell setBackgroundColor:[UIColor colorWithRed:.8 green:.8 blue:1 alpha:1]];
 //    }
 //    else [cell setBackgroundColor:[UIColor clearColor]];
+    
+#if 0
     if(indexPath.row % 6 == 0)
     {
         cell.accessoryView = [MSCellAccessory accessoryWithType:FLAT_DETAIL_DISCLOSURE colors:@[[UIColor colorWithRed:253/255.0 green:184/255.0 blue:0/255.0 alpha:1.0], [UIColor colorWithWhite:0.5 alpha:1.0]]];
@@ -336,6 +340,9 @@
     {
         cell.accessoryView = [MSCellAccessory accessoryWithType:FLAT_FOLD_INDICATOR color:[UIColor colorWithRed:0/255.0 green:123/255.0 blue:170/255.0 alpha:1.0]];
     }
+#else
+    cell.accessoryView = [MSCellAccessory accessoryWithType:FLAT_DISCLOSURE_INDICATOR color:[UIColor colorWithRed:0/255.0 green:166/255.0 blue:149/255.0 alpha:1.0]];
+#endif
     
     
     
